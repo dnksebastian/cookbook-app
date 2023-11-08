@@ -1,0 +1,40 @@
+# Cookbook Fullstack App
+
+This is a portfolio project - a fullstack cookbook app. It allows users to manage and organize their recipes. The project includes both front-end and back-end components.
+
+## Table of Contents
+
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [License](#license)
+
+## Features
+
+- **User Authentication:**
+  - Users can sign up, log in, and manage their recipes.
+- **Recipe Management:**
+  - Add, edit, delete, and view recipes.
+- **Search:**
+  - Search for recipes based on keywords
+- **Responsive Design:**
+  - User-friendly interface accessible on various devices.
+
+## Technologies Used
+
+- **Frontend:**
+  - HTML, CSS, JavaScript
+  - Frameworks: React.js
+- **Backend:**
+  - Node.js
+  - Express.js
+  - Database: MongoDB
+- **Authentication:**
+  - JSON Web Tokens (JWT)
+- **Other Tools:**
+  - Git for version control
+  - GitHub for repository hosting
+  - Render for hosting
+
+## License
+
+This project is licensed under the [MIT License](https://en.wikipedia.org/wiki/MIT_License).
