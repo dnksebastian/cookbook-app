@@ -6,7 +6,6 @@ This is a portfolio project - a fullstack cookbook app. It allows users to manag
 
 - [Features](#features)
 - [Technologies Used](#technologies-used)
-- [License](#license)
 
 ## Features
 
@@ -34,7 +33,3 @@ This is a portfolio project - a fullstack cookbook app. It allows users to manag
   - Git for version control
   - GitHub for repository hosting
   - Render for hosting
-
-## License
-
-This project is licensed under the [MIT License](https://en.wikipedia.org/wiki/MIT_License).
