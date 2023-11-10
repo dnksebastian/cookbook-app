@@ -12,14 +12,20 @@ import RecipeDetails from "./pages/RecipeDetails/RecipeDetails.jsx";
 import Search from "./pages/Search/Search.jsx";
 
 import Navbar from "./components/Navbar/Navbar.jsx";
+import ThemeSelector from "./components/ThemeSelector/ThemeSelector.jsx";
 
+import { useTheme } from "./hooks/useTheme.js";
 // Render
 
 function App() {
+
+  const { mode } = useTheme()
+
   return (
-    <>
+    <div className={`App ${mode}`}>
       <BrowserRouter>
         <Navbar />
+        <ThemeSelector />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/new" element={<NewRecipe />} />
@@ -28,7 +34,7 @@ function App() {
           <Route path="*" element={<ErrorPage />} />
         </Routes>
       </BrowserRouter>
-    </>
+    </div>
   );
 }
 
