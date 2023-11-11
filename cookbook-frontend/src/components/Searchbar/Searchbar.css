@@ -1,7 +1,12 @@
+.searchbar label {
+  color: white;
+}
+
 .searchbar form {
     display: flex;
     align-items: center;
   }
-  .searchbar input {
+
+.searchbar input {
     margin-left: 10px;
   }

@@ -36,6 +36,85 @@
       ],
       "method": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Esse minima ex rem quis similique eum ratione quaerat, voluptas molestias ut repudiandae delectus voluptates. Eius esse at tenetur ab accusamus excepturi?",
       "cookingTime": "35 minutes"
+    },
+    {
+      "id": "4",
+      "title": "Caprese Salad",
+      "ingredients": [
+        "2 large Tomatoes",
+        "1 ball Fresh Mozzarella",
+        "Fresh Basil Leaves",
+        "Balsamic Glaze",
+        "Extra Virgin Olive Oil",
+        "Salt and Pepper to taste"
+      ],
+      "method": "1. Slice tomatoes and fresh mozzarella into 1/4-inch thick slices. 2. Arrange tomato and mozzarella slices on a serving platter, alternating and overlapping. 3. Tuck fresh basil leaves between the tomato and mozzarella slices. 4. Drizzle with balsamic glaze and olive oil. 5. Season with salt and pepper. Serve immediately.",
+      "cookingTime": "10 minutes"
+    },
+    {
+      "id": "5",
+      "title": "Quinoa Salad",
+      "ingredients": [
+        "1 cup Quinoa, cooked and cooled",
+        "1 cup Cherry Tomatoes, halved",
+        "1/2 English Cucumber, diced",
+        "1/4 cup Red Onion, finely chopped",
+        "1/4 cup Feta Cheese, crumbled",
+        "1/4 cup Kalamata Olives, sliced",
+        "Fresh Lemon Juice",
+        "Olive Oil",
+        "Salt and Pepper to taste"
+      ],
+      "method": "1. In a large bowl, combine quinoa, cherry tomatoes, cucumber, red onion, feta cheese, and olives. 2. Drizzle with fresh lemon juice and olive oil. 3. Toss gently to combine. 4. Season with salt and pepper. Serve chilled.",
+      "cookingTime": "15 minutes"
+    },
+    {
+      "id": "6",
+      "title": "Eggplant Parmesan",
+      "ingredients": [
+        "2 large Eggplants, sliced",
+        "2 cups Marinara Sauce",
+        "1 cup Mozzarella Cheese, shredded",
+        "1/2 cup Parmesan Cheese, grated",
+        "Fresh Basil Leaves",
+        "Olive Oil",
+        "Salt and Pepper to taste"
+      ],
+      "method": "1. Preheat the oven to 375°F (190°C). 2. Brush eggplant slices with olive oil and season with salt and pepper. 3. Bake eggplant slices until tender. 4. In a baking dish, layer marinara sauce, baked eggplant slices, mozzarella, and parmesan. Repeat. 5. Bake until cheese is melted and bubbly. Garnish with fresh basil.",
+      "cookingTime": "30 minutes"
+    },
+    {
+      "id": "7",
+      "title": "Spinach and Mushroom Quesadillas",
+      "ingredients": [
+        "2 cups Spinach, chopped",
+        "1 cup Mushrooms, sliced",
+        "1 cup Black Beans, cooked",
+        "1 cup Cheddar Cheese, shredded",
+        "Whole Wheat Tortillas",
+        "Salsa and Guacamole for serving",
+        "Olive Oil",
+        "Salt and Pepper to taste"
+      ],
+      "method": "1. In a pan, sauté spinach and mushrooms in olive oil until wilted. 2. Add black beans and cook until heated through. 3. On a tortilla, sprinkle cheddar cheese and spoon the spinach, mushroom, and black bean mixture. 4. Top with another tortilla. Cook on a griddle until cheese is melted. 5. Cut into wedges and serve with salsa and guacamole.",
+      "cookingTime": "20 minutes"
+    },
+    {
+      "id": "8",
+      "title": "Chickpea Curry",
+      "ingredients": [
+        "2 cans Chickpeas, drained and rinsed",
+        "1 can Coconut Milk",
+        "1 Onion, finely chopped",
+        "2 Tomatoes, diced",
+        "3 cloves Garlic, minced",
+        "1 tablespoon Curry Powder",
+        "1 teaspoon Turmeric",
+        "Cilantro for garnish",
+        "Cooked Basmati Rice"
+      ],
+      "method": "1. In a pan, sauté onion and garlic until softened. 2. Add chickpeas, coconut milk, tomatoes, curry powder, and turmeric. Simmer until flavors meld. 3. Serve over cooked basmati rice. Garnish with cilantro.",
+      "cookingTime": "25 minutes"
     }
   ]
 }
