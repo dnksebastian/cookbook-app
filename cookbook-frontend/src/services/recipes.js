@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseURL = 'http://localhost:3001/recipes'
+const baseURL = '/api/recipes'
 
 const getAll = () => {
     const req = axios.get(baseURL);

@@ -1,0 +1,12 @@
+POST http://localhost:3001/api/recipes
+Content-Type: application/json
+
+{
+    "title": "",
+    "ingredients": [
+        "",
+        "",
+    ],
+    "method": "",
+    "cookingTime": ""
+}
