@@ -5,12 +5,6 @@ const Recipe = require('../models/recipe');
 recipesRouter.get('/', async (_request, response) => {
     const recipes = await Recipe.find({});
     response.json(recipes);
-
-    // Recipe.find({})
-    //     .then(recipes => {
-    //         response.json(recipes);
-    //     })
-    //     .catch(error => next(error));
 });
 
 recipesRouter.post('/', async (request, response) => {
@@ -29,12 +23,6 @@ recipesRouter.post('/', async (request, response) => {
 
     const savedRecipe = await recipe.save();
     response.status(201).json(savedRecipe);
-
-    // recipe.save()
-    //     .then(savedRecipe => {
-    //         response.status(201).json(savedRecipe);
-    //     })
-    //     .catch(error => next(error));
 });
 
 recipesRouter.get('/:id', async (request, response) => {
@@ -45,16 +33,6 @@ recipesRouter.get('/:id', async (request, response) => {
     } else {
         response.status(404).end();
     }
-
-    // Recipe.findById(id)
-    //     .then(recipe => {
-    //         if (recipe) {
-    //             response.json(recipe);
-    //         } else {
-    //             response.status(404).end();
-    //         }
-    //     })
-    //     .catch (error => next(error));
 });
 
 
@@ -62,12 +40,6 @@ recipesRouter.delete('/:id', async (request, response) => {
     const id = request.params.id;
     await Recipe.findByIdAndDelete(id);
     response.status(204).end();
-
-    // Recipe.findByIdAndDelete(id)
-    //     .then(_result => {
-    //         response.status(204).end();
-    //     })
-    //     .catch(error => next(error));
 });
 
 recipesRouter.put('/:id', (request, response, next) => {

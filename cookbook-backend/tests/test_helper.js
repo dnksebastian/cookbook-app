@@ -16,7 +16,14 @@ const initialRecipes = [
 ];
 
 const nonExistingId = async () => {
-    const recipe = new Recipe({ content: 'willberemoved' });
+
+    const recipe = new Recipe({
+        title: 'To remove',
+        ingredients: ['Test'],
+        method: 'Testing',
+        cookingTime: '10'
+    });
+
     await recipe.save();
     await recipe.deleteOne();
 
