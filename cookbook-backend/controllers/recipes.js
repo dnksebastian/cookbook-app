@@ -2,15 +2,18 @@ const recipesRouter = require('express').Router();
 const Recipe = require('../models/recipe');
 
 
-recipesRouter.get('/', (_request, response, next) => {
-    Recipe.find({})
-        .then(recipes => {
-            response.json(recipes);
-        })
-        .catch(error => next(error));
+recipesRouter.get('/', async (_request, response) => {
+    const recipes = await Recipe.find({});
+    response.json(recipes);
+
+    // Recipe.find({})
+    //     .then(recipes => {
+    //         response.json(recipes);
+    //     })
+    //     .catch(error => next(error));
 });
 
-recipesRouter.post('/', (request, response, next) => {
+recipesRouter.post('/', async (request, response) => {
     const body = request.body;
 
     // if (!body || body.title === undefined) {
@@ -24,36 +27,47 @@ recipesRouter.post('/', (request, response, next) => {
         cookingTime: body.cookingTime
     });
 
-    recipe.save()
-        .then(savedRecipe => {
-            response.json(savedRecipe);
-        })
-        .catch(error => next(error));
+    const savedRecipe = await recipe.save();
+    response.status(201).json(savedRecipe);
+
+    // recipe.save()
+    //     .then(savedRecipe => {
+    //         response.status(201).json(savedRecipe);
+    //     })
+    //     .catch(error => next(error));
 });
 
-recipesRouter.get('/:id', (request, response, next) => {
+recipesRouter.get('/:id', async (request, response) => {
     const id = request.params.id;
+    const recipe = await Recipe.findById(id);
+    if (recipe) {
+        response.json(recipe);
+    } else {
+        response.status(404).end();
+    }
 
-    Recipe.findById(id)
-        .then(recipe => {
-            if (recipe) {
-                response.json(recipe);
-            } else {
-                response.status(404).end();
-            }
-        })
-        .catch (error => next(error));
+    // Recipe.findById(id)
+    //     .then(recipe => {
+    //         if (recipe) {
+    //             response.json(recipe);
+    //         } else {
+    //             response.status(404).end();
+    //         }
+    //     })
+    //     .catch (error => next(error));
 });
 
 
-recipesRouter.delete('/:id', (request, response, next) => {
+recipesRouter.delete('/:id', async (request, response) => {
     const id = request.params.id;
+    await Recipe.findByIdAndDelete(id);
+    response.status(204).end();
 
-    Recipe.findByIdAndDelete(id)
-        .then(_result => {
-            response.status(204).end();
-        })
-        .catch(error => next(error));
+    // Recipe.findByIdAndDelete(id)
+    //     .then(_result => {
+    //         response.status(204).end();
+    //     })
+    //     .catch(error => next(error));
 });
 
 recipesRouter.put('/:id', (request, response, next) => {
