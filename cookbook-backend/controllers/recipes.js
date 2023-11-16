@@ -2,18 +2,6 @@ const recipesRouter = require('express').Router();
 const mongoose = require('mongoose');
 const Recipe = require('../models/recipe');
 
-// const jwt = require('jsonwebtoken');
-// const User = require('../models/user');
-
-
-// const getToken = (request) => {
-//     const authorization = request.get('authorization');
-//     if(authorization && authorization.startsWith('Bearer ')) {
-//         return authorization.replace('Bearer ', '');
-//     }
-//     return null;
-// };
-
 recipesRouter.get('/', async (_request, response) => {
     const recipes = await Recipe.find({}).populate('user', { username: 1, name: 1 });
     response.json(recipes);
@@ -26,19 +14,6 @@ recipesRouter.post('/', async (request, response) => {
     if (!user) {
         return response.status(401).json({ error: 'User unauthorized' });
     }
-
-    // const decodedToken = jwt.verify(getToken(request), process.env.SECRET);
-    // const decodedToken = jwt.verify(request.token, process.env.SECRET);
-
-    // if (!decodedToken.id) {
-    //     return response.status(401).json({ error: 'token invalid' });
-    // }
-
-    // const user = await User.findById(decodedToken.id);
-
-    // if (!body || body.title === undefined) {
-    //   return response.status(400).json({ error: 'Title is missing'});
-    // }
 
     const recipe = new Recipe({
         title: body.title,
