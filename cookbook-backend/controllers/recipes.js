@@ -1,14 +1,40 @@
 const recipesRouter = require('express').Router();
+const mongoose = require('mongoose');
 const Recipe = require('../models/recipe');
 
+// const jwt = require('jsonwebtoken');
+// const User = require('../models/user');
+
+
+// const getToken = (request) => {
+//     const authorization = request.get('authorization');
+//     if(authorization && authorization.startsWith('Bearer ')) {
+//         return authorization.replace('Bearer ', '');
+//     }
+//     return null;
+// };
 
 recipesRouter.get('/', async (_request, response) => {
-    const recipes = await Recipe.find({});
+    const recipes = await Recipe.find({}).populate('user', { username: 1, name: 1 });
     response.json(recipes);
 });
 
 recipesRouter.post('/', async (request, response) => {
     const body = request.body;
+    const user = request.user;
+
+    if (!user) {
+        return response.status(401).json({ error: 'User unauthorized' });
+    }
+
+    // const decodedToken = jwt.verify(getToken(request), process.env.SECRET);
+    // const decodedToken = jwt.verify(request.token, process.env.SECRET);
+
+    // if (!decodedToken.id) {
+    //     return response.status(401).json({ error: 'token invalid' });
+    // }
+
+    // const user = await User.findById(decodedToken.id);
 
     // if (!body || body.title === undefined) {
     //   return response.status(400).json({ error: 'Title is missing'});
@@ -18,16 +44,20 @@ recipesRouter.post('/', async (request, response) => {
         title: body.title,
         ingredients: body.ingredients,
         method: body.method,
-        cookingTime: body.cookingTime
+        cookingTime: body.cookingTime,
+        user: user._id
     });
 
     const savedRecipe = await recipe.save();
+    user.recipes = user.recipes.concat(savedRecipe._id);
+    await user.save();
+
     response.status(201).json(savedRecipe);
 });
 
 recipesRouter.get('/:id', async (request, response) => {
     const id = request.params.id;
-    const recipe = await Recipe.findById(id);
+    const recipe = await Recipe.findById(id).populate('user', { username: 1, name: 1 });
     if (recipe) {
         response.json(recipe);
     } else {
@@ -38,8 +68,24 @@ recipesRouter.get('/:id', async (request, response) => {
 
 recipesRouter.delete('/:id', async (request, response) => {
     const id = request.params.id;
-    await Recipe.findByIdAndDelete(id);
-    response.status(204).end();
+    const user = request.user;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return response.status(404).json({ error: 'Invalid recipe ID' });
+    }
+
+    const recipe = await Recipe.findById(id);
+
+    if(!recipe) {
+        return response.status(410).end();
+    }
+
+    if (user && recipe.user.toString() === user.id.toString()) {
+        await Recipe.findByIdAndRemove(id);
+        response.status(204).end();
+    } else {
+        response.status(401).json({ error: 'Deleting not possible - user unauthorized' });
+    }
 });
 
 recipesRouter.put('/:id', (request, response, next) => {

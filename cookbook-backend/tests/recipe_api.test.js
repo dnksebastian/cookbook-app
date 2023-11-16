@@ -3,25 +3,64 @@ const mongoose = require('mongoose');
 const helper = require('./test_helper');
 const app = require('../app');
 const api = supertest(app);
+const bcrypt = require('bcrypt');
 
+const User = require('../models/user');
 const Recipe = require('../models/recipe');
 
-beforeEach(async () => {
+const testUser = supertest.agent(app);
+let userToken = null;
+
+const createTestUser = async () => {
+    const testUser = {
+        username: 'testuser',
+        name: 'Test User',
+        password: 'test'
+    };
+
+    await api
+        .post('/api/users')
+        .send(testUser)
+        .expect(201)
+        .expect('Content-Type', /application\/json/);
+};
+
+const loginTestUser = async () => {
+    const loggedUser = await testUser
+        .post('/api/login')
+        .send({ username: 'testuser', password: 'test' })
+        .expect(200)
+        .expect('Content-Type', /application\/json/);
+
+    userToken = loggedUser.body.token;
+};
+
+beforeAll(async () => {
+    await createTestUser();
+    console.log('test user created');
+    await loginTestUser();
+    console.log('test user logged in');
+    // await Recipe.insertMany(helper.initialRecipes);
     await Recipe.deleteMany({});
-    await Recipe.insertMany(helper.initialRecipes);
-
-    // const recipeObjects = helper.initialRecipes.map(recipe => new Recipe(recipe));
-    // const promiseArr = recipeObjects.map(recipe => recipe.save());
-    // await Promise.all(promiseArr);
-
-    // for (let recipe of helper.initialRecipes) {
-    //     let recipeObj = new Recipe(recipe);
-    //     await recipeObj.save();
-    // }
 });
 
 
 describe('some recipes available initially', () => {
+
+    beforeEach(async () => {
+        await Recipe.deleteMany({});
+        // await Recipe.insertMany(helper.initialRecipes);
+
+        for (let recipe of helper.initialRecipes) {
+            // let recipeObj = new Recipe(recipe);
+            await api
+                .post('/api/recipes')
+                .set('Authorization', `Bearer ${userToken}`)
+                .send(recipe)
+                .expect(201)
+                .expect('Content-Type', /application\/json/);
+        }
+    });
 
     test('return recipes as json', async () => {
         await api
@@ -46,6 +85,21 @@ describe('some recipes available initially', () => {
 });
 
 describe('fetching a specific recipe', () => {
+
+    beforeEach(async () => {
+        await Recipe.deleteMany({});
+        // await Recipe.insertMany(helper.initialRecipes);
+
+        for (let recipe of helper.initialRecipes) {
+            // let recipeObj = new Recipe(recipe);
+            await api
+                .post('/api/recipes')
+                .set('Authorization', `Bearer ${userToken}`)
+                .send(recipe)
+                .expect(201)
+                .expect('Content-Type', /application\/json/);
+        }
+    });
 
     test('a specific recipe can be fetched', async () => {
         const recipesAtStart = await helper.recipesInDb();
@@ -78,6 +132,21 @@ describe('fetching a specific recipe', () => {
 });
 
 describe('adding new recipe', () => {
+    beforeEach(async () => {
+        await Recipe.deleteMany({});
+        // await Recipe.insertMany(helper.initialRecipes);
+
+        for (let recipe of helper.initialRecipes) {
+            // let recipeObj = new Recipe(recipe);
+            await api
+                .post('/api/recipes')
+                .set('Authorization', `Bearer ${userToken}`)
+                .send(recipe)
+                .expect(201)
+                .expect('Content-Type', /application\/json/);
+        }
+    });
+
     test('new valid recipe can be added', async () => {
         const newRecipe = {
             title: 'Test recipe 3',
@@ -88,6 +157,7 @@ describe('adding new recipe', () => {
 
         await api
             .post('/api/recipes')
+            .set('Authorization', `Bearer ${userToken}`)
             .send(newRecipe)
             .expect(201)
             .expect('Content-Type', /application\/json/);
@@ -108,8 +178,28 @@ describe('adding new recipe', () => {
 
         await api
             .post('/api/recipes')
+            .set('Authorization', `Bearer ${userToken}`)
             .send(newRecipe)
             .expect(400);
+
+        const recipesAtEnd = await helper.recipesInDb();
+
+        expect(recipesAtEnd).toHaveLength(helper.initialRecipes.length);
+    });
+
+    test('adding recipe fails with 401 if user not logged', async () => {
+        const newRecipe = {
+            title: 'Valid title',
+            ingredients: ['Valid ingredient'],
+            method: 'Valid method',
+            cookingTime: '10'
+        };
+
+        await api
+            .post('/api/recipes')
+            .set('Authorization', 'Bearer invalidToken')
+            .send(newRecipe)
+            .expect(401);
 
         const recipesAtEnd = await helper.recipesInDb();
 
@@ -118,12 +208,29 @@ describe('adding new recipe', () => {
 });
 
 describe('deleting a recipe', () => {
+
+    beforeEach(async () => {
+        await Recipe.deleteMany({});
+        // await Recipe.insertMany(helper.initialRecipes);
+
+        for (let recipe of helper.initialRecipes) {
+            // let recipeObj = new Recipe(recipe);
+            await api
+                .post('/api/recipes')
+                .set('Authorization', `Bearer ${userToken}`)
+                .send(recipe)
+                .expect(201)
+                .expect('Content-Type', /application\/json/);
+        }
+    });
+
     test('recipe can be deleted', async () => {
         const startRecipes = await helper.recipesInDb();
         const recipeToDelete = startRecipes[0];
 
         await api
             .delete(`/api/recipes/${recipeToDelete.id}`)
+            .set('Authorization', `Bearer ${userToken}`)
             .expect(204);
 
         const endRecipes = await helper.recipesInDb();
@@ -133,6 +240,102 @@ describe('deleting a recipe', () => {
         const titles = endRecipes.map(r => r.title);
 
         expect(titles).not.toContain(recipeToDelete.title);
+    });
+});
+
+describe('one user in db initially', () => {
+    beforeEach(async () => {
+        await User.deleteMany({});
+
+        const passwordHash = await bcrypt.hash('secret', 10);
+        const user = new User({ username: 'root', passwordHash });
+
+        await user.save();
+    });
+
+    test('adding new username succeeds', async () => {
+        const startUsers = await helper.usersInDb();
+
+        const newUser = {
+            username: 'newTest',
+            name: 'John Doe',
+            password: 'testpass',
+        };
+
+        await api
+            .post('/api/users')
+            .send(newUser)
+            .expect(201)
+            .expect('Content-Type', /application\/json/);
+
+        const endUsers = await helper.usersInDb();
+        expect(endUsers).toHaveLength(startUsers.length + 1);
+
+        const usernames = endUsers.map(u => u.username);
+        expect(usernames).toContain(newUser.username);
+    });
+
+    test('adding new username with not unique username fails with status 400', async () => {
+        const startUsers = await helper.usersInDb();
+
+        const newUser = {
+            username: 'root',
+            name: 'Invalid',
+            password: 'testpwd',
+        };
+
+        const result = await api
+            .post('/api/users')
+            .send(newUser)
+            .expect(400)
+            .expect('Content-Type', /application\/json/);
+
+        expect(result.body.error).toContain('expected `username` to be unique');
+
+        const endUsers = await helper.usersInDb();
+        expect(endUsers).toEqual(startUsers);
+    });
+
+    test('adding user with username too short fails', async () => {
+        const startUsers = await helper.usersInDb();
+
+        const newUser = {
+            username: 'us',
+            name: 'Too Short',
+            password: 'testpwd',
+        };
+
+        const result = await api
+            .post('/api/users')
+            .send(newUser)
+            .expect(400)
+            .expect('Content-Type', /application\/json/);
+
+        expect(result.body.error).toContain('must have at least 3');
+
+        const endUsers = await helper.usersInDb();
+        expect(endUsers).toEqual(startUsers);
+    });
+
+    test('adding user with invalid password fails', async () => {
+        const startUsers = await helper.usersInDb();
+
+        const newUser = {
+            username: 'usernameOK',
+            name: 'Too Short',
+            password: 'in',
+        };
+
+        const result = await api
+            .post('/api/users')
+            .send(newUser)
+            .expect(400)
+            .expect('Content-Type', /application\/json/);
+
+        expect(result.body.error).toContain('must have at least 3');
+
+        const endUsers = await helper.usersInDb();
+        expect(endUsers).toEqual(startUsers);
     });
 });
 

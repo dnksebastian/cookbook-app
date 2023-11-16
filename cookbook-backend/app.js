@@ -4,7 +4,11 @@ require('express-async-errors');
 
 const app = express();
 const cors = require('cors');
+
+const loginRouter = require('./controllers/login');
+const usersRouter = require('./controllers/users');
 const recipesRouter = require('./controllers/recipes');
+
 const middleware = require('./utils/middleware');
 const logger = require('./utils/logger');
 const mongoose = require('mongoose');
@@ -26,10 +30,15 @@ app.use(express.static('dist'));
 app.use(express.json());
 app.use(middleware.requestLogger);
 
+app.use(middleware.tokenExtractor);
+app.use(middleware.userExtractor);
+
 // app.get('/', (_request, response) => {
 //     response.send('<h1>Server is working</h1>');
 // });
 
+app.use('/api/login', loginRouter);
+app.use('/api/users', usersRouter);
 app.use('/api/recipes', recipesRouter);
 
 app.use(middleware.unknownEndpoint);
