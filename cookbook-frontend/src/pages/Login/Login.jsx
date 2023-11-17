@@ -1,17 +1,35 @@
-import { useState } from 'react';
 import './Login.css'
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom'
 
-import { Link } from 'react-router-dom'
+import { useAuthContext } from '../../hooks/useAuthContext';
+import loginServices from '../../services/login';
 
 const Login = () => {
-
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
-  const submitLogin = (e) => {
+  const userData = useAuthContext();
+  const navigate = useNavigate();
+
+  const submitLogin = async (e) => {
     e.preventDefault();
 
-    console.log('login');
+    const userToLogin = {
+      username,
+      password
+    }
+
+    try {
+      const resp = await loginServices.login(userToLogin)
+      userData.loginUser(resp)
+    } catch (err) {
+      console.log(err);
+    }
+
+    setUsername('')
+    setPassword('')
+    navigate('/');
   };
   
   return (

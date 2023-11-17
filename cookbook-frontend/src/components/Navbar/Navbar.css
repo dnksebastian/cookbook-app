@@ -20,15 +20,31 @@
     font-size: 2rem;
 }
 
+.auth-helper {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
 .nav-link {
     font-size: 1.3rem;
     color: white;
     padding: .5rem;
     border: 1px solid white;
     transition: .3s;
+    min-width: max-content;
 }
 
 .nav-link:hover, .nav-link:focus-visible {
     background-color: white;
     color: darkorchid;
+}
+
+#logout-btn {
+    font-weight: 500;
+}
+
+#logout-btn:hover {
+    background-color: transparent;
+    color: white;
 }
