@@ -1,15 +1,51 @@
 import './Signup.css'
 
-import { Link } from 'react-router-dom'
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom'
 
+import { useNotificationContext } from '../../hooks/useNotification';
+import signupServices from '../../services/signup';
 
 
 const Signup = () => {
 
-  const handleSignup = (e) => {
+  const [displayName, setDisplayName] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  const navigate = useNavigate();
+  const notificationControl = useNotificationContext();
+
+
+  const handleSignup = async (e) => {
     e.preventDefault();
 
-    console.log('signup');
+    const newUser = {
+      name: displayName,
+      username: username,
+      password: password
+    }
+
+    try {
+      await signupServices.signup(newUser);
+
+      notificationControl.displayNotification({
+        type: 'info',
+        message: 'User successfully created'
+      });
+
+      setDisplayName('');
+      setUsername('');
+      setPassword('');
+      navigate('/');
+    }
+    catch (err) {
+      notificationControl.displayNotification({
+        type: 'error',
+        message: err.response.data.error || 'Could not sign up'
+      });
+    }
+
   };
 
   return (
@@ -22,6 +58,8 @@ const Signup = () => {
           required
           className='signup-input'
           type="text"
+          value={displayName}
+          onChange={({ target }) => setDisplayName(target.value)}
           />
         </label>
         <label>
@@ -30,6 +68,8 @@ const Signup = () => {
           required
           className='signup-input'
           type="text"
+          value={username}
+          onChange={({ target }) => setUsername(target.value)}
           />
         </label>
         <label>
@@ -38,6 +78,8 @@ const Signup = () => {
           required
           className='signup-input'
           type="password"
+          value={password}
+          onChange={({ target }) => setPassword(target.value)}
           />
         </label>
         <button type='submit' className='btn-signup'>Signup!</button>

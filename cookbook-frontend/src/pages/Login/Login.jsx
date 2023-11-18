@@ -3,14 +3,17 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom'
 
 import { useAuthContext } from '../../hooks/useAuthContext';
+import { useNotificationContext } from '../../hooks/useNotification';
+
 import loginServices from '../../services/login';
 
 const Login = () => {
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
   const userData = useAuthContext();
   const navigate = useNavigate();
+  const notificationControl = useNotificationContext();
 
   const submitLogin = async (e) => {
     e.preventDefault();
@@ -23,13 +26,20 @@ const Login = () => {
     try {
       const resp = await loginServices.login(userToLogin)
       userData.loginUser(resp)
+      
+      notificationControl.displayNotification({
+        type: 'info',
+        message: 'Successfully logged in!'
+      })
+      setUsername('')
+      setPassword('')
+      navigate('/');
     } catch (err) {
-      console.log(err);
+      notificationControl.displayNotification({
+        type: 'error',
+        message: err.response.data.error || 'Could not log in'
+      })
     }
-
-    setUsername('')
-    setPassword('')
-    navigate('/');
   };
   
   return (
