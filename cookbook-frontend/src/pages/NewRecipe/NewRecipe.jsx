@@ -19,7 +19,7 @@ const NewRecipe = () => {
 
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const newRecipeObj = {
@@ -29,8 +29,14 @@ const NewRecipe = () => {
       cookingTime: `${cookingTime} minutes`
     }
 
-    recipeServices.addRecipe(newRecipeObj);
-    setIsSuccess(true);
+    try {
+      await recipeServices.addRecipe(newRecipeObj);
+      await recipeServices.getAll();
+      setIsSuccess(true);
+    }
+    catch (err) {
+      console.log(err);
+    }
   }
 
   useEffect(() => {

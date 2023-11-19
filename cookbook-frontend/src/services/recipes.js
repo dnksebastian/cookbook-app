@@ -1,6 +1,13 @@
 import axios from 'axios';
 
+// Routes
 const baseURL = '/api/recipes'
+let token
+
+const setToken = (newToken) => {
+    token = `Bearer ${newToken}`
+};
+
 
 const getAll = () => {
     const req = axios.get(baseURL);
@@ -17,8 +24,21 @@ const getFiltered = (query) => {
     return req.then(res => res.data);
 };
 
-const addRecipe = (recipeObj) => {
-    return axios.post(baseURL, recipeObj)
+const addRecipe = async (recipeObj) => {
+    const config = {
+        headers: { Authorization: token }
+    }
+    const response = await axios.post(baseURL, recipeObj, config);
+    return response.data;
+};
+
+const removeRecipe = async (id) => {
+    const config = {
+        headers: { Authorization: token }
+    }
+
+    const response = await axios.delete(`${baseURL}/${id}`, config);
+    return response.data
 };
 
 const updateRecipe = (id, updatedRecipe) => {
@@ -30,7 +50,9 @@ const recipeServices = {
     getSingle,
     getFiltered,
     addRecipe,
-    updateRecipe
+    updateRecipe,
+    removeRecipe,
+    setToken
 }
 
 export default recipeServices

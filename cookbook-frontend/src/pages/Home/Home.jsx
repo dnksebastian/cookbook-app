@@ -11,6 +11,19 @@ const Home = () => {
 
   const [recipes, setRecipes] = useState([]);
 
+  const handleRemove = async (id) => {
+    try {
+      setIsLoading(true)
+      await recipeServices.removeRecipe(id)
+      const newRecipes = await recipeServices.getAll()
+      setRecipes(newRecipes)
+      setIsError('')
+      setIsLoading(false)
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     setIsLoading(true);
 
@@ -36,7 +49,7 @@ const Home = () => {
       {isError && <p className='error-msg'>{isError}</p>}
       {isLoading && <p className='loading-msg'><span className="loader"></span></p>}
 
-      {recipes && <RecipeList recipes={recipes} />}
+      {recipes && <RecipeList recipes={recipes} handleRemove={handleRemove}/>}
     </div>
   )
 

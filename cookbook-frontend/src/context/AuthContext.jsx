@@ -1,5 +1,7 @@
 import { createContext, useEffect, useReducer } from 'react';
 
+import recipeServices from '../services/recipes';
+
 export const AuthContext = createContext();
 
 const authReducer = (state, action) => {
@@ -27,7 +29,9 @@ export function AuthContextProvider({ children }) {
     }
 
     useEffect(() => {
+        console.log('user changed');
         localStorage.setItem('cookbookUser', JSON.stringify(state.user))
+        recipeServices.setToken(state.user?.token)
     }, [state.user])
 
     const loginUser = (data) => {

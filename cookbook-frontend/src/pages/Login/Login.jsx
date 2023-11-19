@@ -6,6 +6,7 @@ import { useAuthContext } from '../../hooks/useAuthContext';
 import { useNotificationContext } from '../../hooks/useNotification';
 
 import loginServices from '../../services/login';
+// import recipeServices from '../../services/recipes';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -31,13 +32,15 @@ const Login = () => {
         type: 'info',
         message: 'Successfully logged in!'
       })
+
+      // recipeServices.setToken(resp.token)
       setUsername('')
       setPassword('')
       navigate('/');
     } catch (err) {
       notificationControl.displayNotification({
         type: 'error',
-        message: err.response.data.error || 'Could not log in'
+        message: err?.response?.data.error || 'Could not log in'
       })
     }
   };

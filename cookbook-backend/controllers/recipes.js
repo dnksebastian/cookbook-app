@@ -11,6 +11,9 @@ recipesRouter.post('/', async (request, response) => {
     const body = request.body;
     const user = request.user;
 
+    console.log(request.body);
+    console.log(request.user);
+
     if (!user) {
         return response.status(401).json({ error: 'User unauthorized' });
     }
