@@ -3,7 +3,8 @@ import { useEffect, useState } from 'react';
 
 import recipeServices from '../../services/recipes';
 
-import RecipeList from '../../components/RecipeList/RecipeList';
+// import RecipeList from '../../components/RecipeList/RecipeList';
+import UserRecipes from '../../components/UserRecipes/UserRecipes';
 
 const Home = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -49,7 +50,8 @@ const Home = () => {
       {isError && <p className='error-msg'>{isError}</p>}
       {isLoading && <p className='loading-msg'><span className="loader"></span></p>}
 
-      {recipes && <RecipeList recipes={recipes} handleRemove={handleRemove}/>}
+      {/* {recipes && <RecipeList recipes={recipes} handleRemove={handleRemove}/>} */}
+      {recipes && <UserRecipes recipes={recipes} handleRemove={handleRemove}/>}
     </div>
   )
 

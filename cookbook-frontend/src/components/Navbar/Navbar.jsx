@@ -5,12 +5,23 @@ import Searchbar from '../Searchbar/Searchbar';
 
 import { useTheme } from '../../hooks/useTheme';
 import { useAuthContext } from '../../hooks/useAuthContext';
+import userServices from '../../services/signup';
 
 
 const Navbar = () => {
   const { color } = useTheme()
   const userData = useAuthContext();
   const user = userData.user;
+
+  const handleRemoveUser = async () => {
+    try {
+      await userServices.removeUser(user.id)
+      userData.logoutUser();
+    }
+    catch (err) {
+      console.log(err);
+    }
+  }
 
   return (
     <header className='header' style={{ background: color }}>
@@ -22,6 +33,7 @@ const Navbar = () => {
         {user &&
         <div className="auth-helper">
           <Link to='/new'><p className='nav-link'>Create Recipe</p></Link>
+          <button onClick={handleRemoveUser} id='delete-btn'>Delete account</button>
           <button onClick={userData.logoutUser} id='logout-btn'>Logout</button>
         </div>
         }

@@ -2,6 +2,7 @@ import axios from 'axios';
 
 // Routes
 const baseURL = '/api/recipes'
+
 let token
 
 const setToken = (newToken) => {

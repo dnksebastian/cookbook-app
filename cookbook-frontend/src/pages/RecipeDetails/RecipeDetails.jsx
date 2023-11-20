@@ -34,10 +34,6 @@ const RecipeDetails = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
-  const handleClick = () => {
-    // yet to be created...
-  }
-
   return (
     <div className={`recipe ${mode}`}>
       {isError && <p className='error-msg'>{isError}</p>}
@@ -51,7 +47,6 @@ const RecipeDetails = () => {
           {recipe.ingredients && recipe.ingredients.map(ing => <li key={ing}>{ing}</li>)}
         </ul>
         <p className="method">{recipe.method}</p>
-        <button onClick={handleClick}>Update me</button>
         </>
       }
     </div>

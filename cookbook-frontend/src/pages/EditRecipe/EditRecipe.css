@@ -1,0 +1,14 @@
+.edit-recipe-wrap {
+  max-width: 1200px;
+  margin: 40px auto;
+}
+
+.edit-recipe-heading {
+    margin-bottom: 2rem;
+}
+
+.edit-recipe-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}

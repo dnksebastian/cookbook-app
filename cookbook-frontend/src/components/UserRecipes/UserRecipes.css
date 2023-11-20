@@ -1,0 +1,17 @@
+.user-recipes-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 40px;
+    max-width: 1200px;
+    margin: 40px auto;
+  }
+  
+  /* dark mode */
+  .user-recipes-list .card.dark {
+    background: #555;
+  }
+  .user-recipes-list .card.dark p,
+  .user-recipes-list .card.dark h3,
+  .user-recipes-list .card.dark div {
+    color: #e4e4e4;
+  }

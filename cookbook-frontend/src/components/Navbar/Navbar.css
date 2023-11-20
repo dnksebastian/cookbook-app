@@ -40,11 +40,13 @@
     color: darkorchid;
 }
 
-#logout-btn {
+#logout-btn, #delete-btn {
     font-weight: 500;
+    min-width: max-content;
 }
 
-#logout-btn:hover {
+#logout-btn:hover,
+#delete-btn:hover {
     background-color: transparent;
     color: white;
 }

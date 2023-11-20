@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
 
+const mongoose = require('mongoose');
 const usersRouter = require('express').Router();
 const User = require('../models/user');
 
@@ -31,6 +32,28 @@ usersRouter.post('/', async (request, response) => {
     const savedUser = await user.save();
 
     response.status(201).json(savedUser);
+});
+
+usersRouter.delete('/:id', async (request, response) => {
+    const id = request.params.id;
+    const user = request.user;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return response.status(404).json({ error: 'Invalid user ID' });
+    }
+
+    const userToDelete = await User.findById(id);
+
+    if (!userToDelete) {
+        return response.status(410).end();
+    }
+
+    if (user && userToDelete.id.toString() === user.id.toString()) {
+        await User.findByIdAndRemove(id);
+        response.status(204).end();
+    } else {
+        response.status(401).json({ error: 'Deleting not possible - user unauthorized' });
+    }
 });
 
 module.exports = usersRouter;

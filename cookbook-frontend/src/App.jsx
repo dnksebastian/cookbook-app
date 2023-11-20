@@ -9,6 +9,7 @@ import ErrorPage from "./pages/Error/ErrorPage.jsx";
 import Home from "./pages/Home/Home.jsx";
 import NewRecipe from "./pages/NewRecipe/NewRecipe.jsx";
 import RecipeDetails from "./pages/RecipeDetails/RecipeDetails.jsx";
+import EditRecipe from './pages/EditRecipe/EditRecipe.jsx';
 import Search from "./pages/Search/Search.jsx";
 import Login from './pages/Login/Login.jsx';
 import Signup from './pages/Signup/Signup.jsx';
@@ -48,6 +49,10 @@ function App() {
           <Route
           path="/details/:id"
           element={user ? <RecipeDetails /> : <Navigate to='/login' />}
+          />
+          <Route
+          path="/details/edit/:id"
+          element={user ? <EditRecipe /> : <Navigate to='/login' />}
           />
           <Route
           path="/search"
