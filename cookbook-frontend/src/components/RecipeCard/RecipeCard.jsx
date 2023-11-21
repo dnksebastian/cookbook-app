@@ -13,8 +13,8 @@ const RecipeCard = ({recipe, handleRemove}) => {
   return (
     <div className='recipe-card'>
         <h3 className='recipe-card-title'>{recipe?.title}</h3>
-        <p className="recipe-card-time">{recipe?.cookingTime} to make</p>
-        <p className="recipe-card-desc">{recipe?.method.substring(0, 100)}</p>
+        <p className="recipe-card-time">{recipe?.cookingTime} minutes to make</p>
+        <p className="recipe-card-desc">{recipe?.method.substring(0, 100)}...</p>
         <Link
         to={`/details/${recipe?.id}`}
         className='recipe-card-link'

@@ -3,14 +3,17 @@
     max-width: 480px;
     margin: 60px auto;
   }
-  .create label span {
+
+  /* .create label span {
     display: block;
     margin: 30px 0 10px;
-  }
-  .create p {
+  } */
+
+  /* .create p {
     margin-top: 10px;
     font-size: 0.8em;
-  }
+  } */
+
   .create button {
     display: block;
     width: 100px;
@@ -24,10 +27,44 @@
     text-decoration: none;
     margin: 20px auto;
   }
-  .ingredients {
+
+  .new-ingredients-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .new-ingredients-helper {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1rem;
+  }
+
+  .new-ingredients-helper input {
+    max-width: 20rem;
+  }
+
+  .btn-add-new-ingredient {
+    margin: unset!important;
+  }
+  
+  .new-ingredient-helper {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+  }
+  
+  .new-ingredient-remove {
+    max-width: 1rem;
+    cursor: pointer;
+  }
+
+  /* .ingredients {
     display: flex;
     align-items: center;
   }
+
   .ingredients button {
     margin: 0 0 0 10px;
-  }
+  } */

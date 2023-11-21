@@ -1,9 +1,10 @@
 import './NewRecipe.css';
 import { useEffect, useRef, useState } from 'react';
-
 import { useNavigate } from 'react-router-dom';
 
 import recipeServices from '../../services/recipes'
+
+import RemoveIcon from '../../assets/remove-icon.svg'
 
 const NewRecipe = () => {
 
@@ -26,7 +27,8 @@ const NewRecipe = () => {
       title,
       ingredients,
       method,
-      cookingTime: `${cookingTime} minutes`
+      cookingTime
+      // cookingTime: `${cookingTime} minutes`
     }
 
     try {
@@ -58,6 +60,19 @@ const NewRecipe = () => {
     ingredientInput.current.focus();
   };
 
+  const handleRemove = (e) => {
+    e.preventDefault()
+
+    const ingredientWrap = e.target.closest('.new-ingredient-helper');
+    const ingredientEl = ingredientWrap.querySelector('.new-ingredient-el').textContent.trim();
+
+    const newIngredients = ingredients.filter(i => i !== ingredientEl);
+
+    setIngredients(newIngredients)
+
+    ingredientInput.current.focus();
+  };
+
   return (
     <div className='create'>
       <h2 className='page-title'>Add a new recipe</h2>
@@ -74,9 +89,10 @@ const NewRecipe = () => {
           />
         </label>
 
+        <div className="new-input-helper">
         <label>
-          <span>Recipe ingredients:</span>
-          <div className="ingredients">
+          <span>Recipe ingredients (one at a time):</span>
+          <div className="new-ingredients-helper">
             <input
             ref={ingredientInput}
             type="text"
@@ -84,12 +100,20 @@ const NewRecipe = () => {
             value={newIngredient}
             />
             <button
-            className='btn'
+            className='btn btn-add-new-ingredient'
             onClick={handleAdd}
             >Add</button>
           </div>
         </label>
-        <p>Current ingredients: {ingredients.map(i => <em key={i}>{i}, </em>)}</p>
+        <div className="new-ingredients-info">
+        <p>Current ingredients:</p>
+          {ingredients?.map(i =>
+            <div className='new-ingredient-helper' key={i}>
+              <p className='new-ingredient-el'>{i}</p> <img src={RemoveIcon} alt="Remove icon" className="new-ingredient-remove" onClick={handleRemove}/>
+            </div>)
+            }
+        </div>
+        </div>
 
         <label>
           <span>Recipe method:</span>

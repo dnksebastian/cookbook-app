@@ -10,7 +10,6 @@ const setToken = (newToken) => {
 
 const signup = async data => {
   const response = await axios.post(baseURL, data)
-  console.log(response.data);
   return response.data
 }
 
@@ -18,8 +17,6 @@ const removeUser = async (id) => {
   const config = {
     headers: { Authorization: token }
   }
-
-  console.log(config);
 
   const response = await axios.delete(`${baseURL}/${id}`, config);
   return response.data

@@ -12,3 +12,20 @@
     flex-direction: column;
     gap: 1rem;
 }
+
+.ingredients-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.ingredient-helper {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+.ingredient-remove {
+  max-width: 1rem;
+  cursor: pointer;
+}

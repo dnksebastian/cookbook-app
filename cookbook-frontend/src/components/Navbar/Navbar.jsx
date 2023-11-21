@@ -6,6 +6,7 @@ import Searchbar from '../Searchbar/Searchbar';
 import { useTheme } from '../../hooks/useTheme';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import userServices from '../../services/signup';
+import recipeServices from '../../services/recipes';
 
 
 const Navbar = () => {
@@ -14,13 +15,26 @@ const Navbar = () => {
   const user = userData.user;
 
   const handleRemoveUser = async () => {
+    let removedAll = false;
+
     try {
-      await userServices.removeUser(user.id)
-      userData.logoutUser();
+      await recipeServices.removeAllByUser(user.id)
+      removedAll = true
     }
     catch (err) {
       console.log(err);
     }
+
+    if(removedAll) {
+      try {
+        await userServices.removeUser(user.id)
+        userData.logoutUser();
+      }
+      catch (err) {
+        console.log(err);
+      }
+    }
+
   }
 
   return (

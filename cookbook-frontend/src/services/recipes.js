@@ -42,8 +42,21 @@ const removeRecipe = async (id) => {
     return response.data
 };
 
-const updateRecipe = (id, updatedRecipe) => {
-    return axios.put(`${baseURL}/${id}`, updatedRecipe)
+const removeAllByUser = async (userID) => {
+    const allRecipesReq = await axios.get(baseURL);
+    const allRecipes = allRecipesReq.data;
+
+    const recipesByUser = allRecipes.filter(r => r.user?.id.toString() === userID.toString());
+
+    recipesByUser.forEach(async (recipe) => {
+        console.log('removed', recipe.id);
+        await removeRecipe(recipe.id);
+    })
+};
+
+const updateRecipe = async (id, updatedRecipe) => {
+    const response = await axios.put(`${baseURL}/${id}`, updatedRecipe);
+    return response.data;
 };
 
 const recipeServices = {
@@ -53,6 +66,7 @@ const recipeServices = {
     addRecipe,
     updateRecipe,
     removeRecipe,
+    removeAllByUser,
     setToken
 }
 
