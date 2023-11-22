@@ -1,0 +1,15 @@
+.home {
+    display: grid;
+    grid-template-rows: 5rem 5rem 1fr;
+    gap: .5rem;
+}
+
+.home-error-msg,
+.home-loading-msg {
+    place-self: center;
+}
+
+.home > .user-recipes-list {
+    /* width: 100%; */
+    grid-row: 3/4;
+}

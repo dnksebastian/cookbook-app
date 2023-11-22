@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 
 import recipeServices from '../../services/recipes'
-import { useTheme } from '../../hooks/useTheme'
+// import { useTheme } from '../../hooks/useTheme'
 
 
 const RecipeDetails = () => {
@@ -14,7 +14,7 @@ const RecipeDetails = () => {
   const [isError, setIsError] = useState('');
   const [recipe, setRecipe] = useState({});
 
-  const { mode } = useTheme()
+  // const { mode } = useTheme()
 
   useEffect(() => {
     setIsLoading(true);
@@ -35,19 +35,19 @@ const RecipeDetails = () => {
   }, [id]);
 
   return (
-    <div className={`recipe ${mode}`}>
-      {isError && <p className='error-msg'>{isError}</p>}
-      {isLoading && <p className='loading-msg'>Loading...</p>}
+    <div className={`recipe-details-page`}>
+      {isError && <p className='error-msg details-error-msg'>{isError}</p>}
+      {isLoading && <p className='loading-msg details-loading-msg'><span className='loader'></span></p>}
 
       {recipe && 
-        <>
-        <h2 className="page-title">{recipe.title}</h2>
-        <p>Takes {recipe.cookingTime} minutes to cook.</p>
+        <div className='recipe-details-wrap'>
+        <h2 className="recipe-details-title">{recipe.title}</h2>
+        <p>Takes <b>{recipe.cookingTime}</b> minutes to cook.</p>
         <ul>
           {recipe.ingredients && recipe.ingredients.map(ing => <li key={ing}>{ing}</li>)}
         </ul>
         <p className="method">{recipe.method}</p>
-        </>
+        </div>
       }
     </div>
   )

@@ -43,13 +43,12 @@ const Home = () => {
     })
   }, [])
 
-
   // console.log(recipes);
 
   return (
     <div className='home'>
-      {isError && <p className='error-msg'>{isError}</p>}
-      {isLoading && <p className='loading-msg'><span className="loader"></span></p>}
+      {isError && <p className='error-msg home-error-msg'>{isError}</p>}
+      {isLoading && <p className='loading-msg home-loading-msg'><span className="loader"></span></p>}
 
       {/* {recipes && <RecipeList recipes={recipes} handleRemove={handleRemove}/>} */}
       {recipes && <UserRecipes recipes={recipes} handleRemove={handleRemove}/>}

@@ -1,18 +1,11 @@
 import './UserRecipes.css'
 
-// import { Link } from 'react-router-dom';
-
-// import { useTheme } from '../../hooks/useTheme';
 import { useAuthContext } from '../../hooks/useAuthContext'
 
 import RecipeCard from '../RecipeCard/RecipeCard';
 
-// import Trashcan from '../../assets/Trashcan.svg';
-
-
 const UserRecipes = ({recipes, handleRemove}) => {
 
-  // const { mode } = useTheme();
   const userData = useAuthContext();
   const user = userData.user;
 

@@ -3,11 +3,15 @@ import './RecipeCard.css'
 import { Link } from 'react-router-dom';
 import { useAuthContext } from '../../hooks/useAuthContext';
 
+import Alert from '../Alert/Alert';
 
 import Trashcan from '../../assets/trashcan.svg';
 import Cogs from '../../assets/editing.svg';
+import { useState } from 'react';
 
 const RecipeCard = ({recipe, handleRemove}) => {
+    const [showAlert, setShowAlert] = useState(false);
+
     const userData = useAuthContext();
     const user = userData.user;
 
@@ -25,7 +29,7 @@ const RecipeCard = ({recipe, handleRemove}) => {
           <img 
                 className="card-control delete-recipe"
                 src={Trashcan} alt="delete icon"
-                onClick={() => handleRemove(recipe?.id)}
+                onClick={() => setShowAlert(true)}
           />
           <Link to={`/details/edit/${recipe?.id}`}>
           <img 
@@ -34,6 +38,14 @@ const RecipeCard = ({recipe, handleRemove}) => {
           />
           </Link>
         </div> : ''}
+        <Alert
+        isOpen={showAlert}
+        onClose={() => setShowAlert(false)}
+        title={'Delete recipe?'}
+        description={'Do you want to delete this recipe?'}
+        confirmBtnLabel={'Yes'}
+        onConfirm={() => handleRemove(recipe?.id)}
+        />
     </div>
   )
 }

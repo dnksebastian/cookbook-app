@@ -1,7 +1,4 @@
 .App {
     min-height: 100%;
-  }
-  
-.App.dark {
-    background: #333;
+    background-color: var(--cs-main-bg);
   }

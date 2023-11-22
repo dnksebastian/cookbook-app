@@ -105,17 +105,17 @@ const EditRecipe = () => {
     
   return (
     <div className="edit-recipe-wrap">
-      {isError && <p className='error-msg'>{isError}</p>}
-      {isLoading && <p className='loading-msg'>Loading...</p>}
+      {isError && <p className='edit-form-error error-msg'>{isError}</p>}
+      {isLoading && <p className='edit-form-loading loading-msg'><span className='loader'></span></p>}
 
       {recipe &&
-      <>
+      <div className='edit-form-wrapper'>
       <h2 className="edit-recipe-heading">Edit recipe</h2>
       <form
       className="edit-recipe-form"
       onSubmit={handleSubmit}
       >
-        <label>
+        <label className='edit-label'>
           <span>Recipe title</span>
           <input
           type="text"
@@ -126,9 +126,9 @@ const EditRecipe = () => {
           />
         </label>
 
-        <div className="input-helper">
-        <label>
-          <span>Recipe ingredients:</span>
+        <div className="edit-recipe-input-helper">
+        <label className='edit-label'>
+          <span>Recipe ingredients (one at a time):</span>
           <div className="ingredients-helper">
             <input
             ref={ingredientInput}
@@ -143,7 +143,7 @@ const EditRecipe = () => {
           </div>
         </label>
         <div className='ingredients-info'>
-          <p>Current ingredients:</p>
+          <p className='edit-cig-label'>Current ingredients:</p>
           {ingredients?.map(i =>
             <div className='ingredient-helper' key={i}>
               <p className='ingredient-el'>{i}</p> <img src={RemoveIcon} alt="Remove icon" className="ingredient-remove" onClick={handleRemoveIngredient}/>
@@ -152,7 +152,7 @@ const EditRecipe = () => {
         </div>
         </div>
 
-        <label>
+        <label className='edit-label'>
           <span>Recipe method:</span>
           <textarea
           onChange={(e) => setMethod(e.target.value)}
@@ -160,7 +160,7 @@ const EditRecipe = () => {
           required
           />
         </label>
-        <label>
+        <label className='edit-label'>
           <span>Cooking time (minutes):</span>
           <input
           type="number"
@@ -169,11 +169,9 @@ const EditRecipe = () => {
           required
           />
         </label>
-        <button
-          className='btn'
-        >Submit</button>
+        <button className='btn edit-recipe-submit'>Submit</button>
       </form>
-      </>}
+      </div>}
     </div>
   )
 }
