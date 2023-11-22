@@ -20,9 +20,9 @@ const getSingle = (id) => {
     return req.then(res => res.data);
 };
 
-const getFiltered = (query) => {
-    const req = axios.get(`${baseURL}?q=${query}`);
-    return req.then(res => res.data);
+const getFiltered = async (query) => {
+    const req = await axios.get(`${baseURL}?q=${query}`);
+    return req.data
 };
 
 const addRecipe = async (recipeObj) => {

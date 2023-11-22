@@ -7,7 +7,8 @@ import { useLocation } from 'react-router-dom'
 
 import recipeServices from '../../services/recipes';
 
-import RecipeList from '../../components/RecipeList/RecipeList';
+// import RecipeList from '../../components/RecipeList/RecipeList';
+import UserRecipes from '../../components/UserRecipes/UserRecipes';
 
 const Search = () => {
   const queryString = useLocation().search;
@@ -37,6 +38,20 @@ const Search = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [queryString]);
 
+  const handleRemove = async (id) => {
+    try {
+      setIsLoading(true)
+      await recipeServices.removeRecipe(id)
+      const newRecipes = await recipeServices.getFiltered(query)
+      setRecipes(newRecipes)
+      setIsError('')
+      setIsLoading(false)
+    } catch (error) {
+      setIsLoading(false)
+      console.log(error);
+    }
+  };
+
 
   return (
     <div className='search-results'>
@@ -45,7 +60,7 @@ const Search = () => {
       {isError && <p className='error-msg'>{isError}</p>}
       {isLoading && <p className='loading-msg'>Loading...</p>}
 
-      {recipes && <RecipeList recipes={recipes}/>}
+      {recipes && <UserRecipes recipes={recipes} handleRemove={handleRemove}/>}
     </div>
   )
 }

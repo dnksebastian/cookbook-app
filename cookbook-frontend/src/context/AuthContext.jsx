@@ -30,7 +30,7 @@ export function AuthContextProvider({ children }) {
     }
 
     useEffect(() => {
-        console.log('user changed');
+        // console.log('user changed');
         localStorage.setItem('cookbookUser', JSON.stringify(state.user))
         recipeServices.setToken(state.user?.token)
         signupServices.setToken(state.user?.token)

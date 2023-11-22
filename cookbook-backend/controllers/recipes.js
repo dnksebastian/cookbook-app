@@ -1,8 +1,19 @@
 const recipesRouter = require('express').Router();
 const mongoose = require('mongoose');
 const Recipe = require('../models/recipe');
+// const { request } = require('express');
+// const express = require('express');
 
-recipesRouter.get('/', async (_request, response) => {
+recipesRouter.get('/', async (request, response) => {
+    let searchQuery = request.query.q;
+
+    if (searchQuery) {
+        const searchRegex = new RegExp(searchQuery, 'i');
+
+        const queriedRecipes = await Recipe.find({ title: { $regex: searchRegex } }).populate('user', { username: 1, name: 1 });
+        return response.json(queriedRecipes);
+    }
+
     const recipes = await Recipe.find({}).populate('user', { username: 1, name: 1 });
     response.json(recipes);
 });

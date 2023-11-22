@@ -2,14 +2,18 @@ import './Navbar.css'
 
 import { Link } from "react-router-dom";
 import Searchbar from '../Searchbar/Searchbar';
+import Alert from '../Alert/Alert';
 
 import { useTheme } from '../../hooks/useTheme';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import userServices from '../../services/signup';
 import recipeServices from '../../services/recipes';
+import { useState } from 'react';
 
 
 const Navbar = () => {
+  const [showAlert, setShowAlert] = useState(false)
+
   const { color } = useTheme()
   const userData = useAuthContext();
   const user = userData.user;
@@ -47,7 +51,7 @@ const Navbar = () => {
         {user &&
         <div className="auth-helper">
           <Link to='/new'><p className='nav-link'>Create Recipe</p></Link>
-          <button onClick={handleRemoveUser} id='delete-btn'>Delete account</button>
+          <button onClick={() => setShowAlert(true)} id='delete-btn'>Delete account</button>
           <button onClick={userData.logoutUser} id='logout-btn'>Logout</button>
         </div>
         }
@@ -58,6 +62,14 @@ const Navbar = () => {
           </div>
         }
       </nav>
+      <Alert
+      isOpen={showAlert}
+      onClose={() => setShowAlert(false)}
+      title='Delete user?'
+      description="Do you want to delete current user and all recipes?"
+      confirmBtnLabel='Yes'
+      onConfirm={handleRemoveUser}
+      />
     </header>
   )
 }

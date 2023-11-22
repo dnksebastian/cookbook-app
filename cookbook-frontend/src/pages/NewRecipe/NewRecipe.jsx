@@ -85,6 +85,7 @@ const NewRecipe = () => {
           type="text"
           onChange={(e) => setTitle(e.target.value)}
           value={title}
+          minLength={5}
           required
           />
         </label>

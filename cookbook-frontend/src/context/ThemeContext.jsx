@@ -1,4 +1,4 @@
-import { createContext, useReducer } from 'react';
+import { createContext, useEffect, useReducer } from 'react';
 
 export const ThemeContext = createContext();
 
@@ -18,6 +18,23 @@ export function ThemeProvider({ children }) {
         color: '#58249c',
         mode: 'dark'
     })
+
+    let localStorageTheme = JSON.parse(localStorage.getItem('cookbookTheme'));
+
+    useEffect(() => {
+        // console.log('changed local storage');
+        localStorage.setItem('cookbookTheme', JSON.stringify(state));
+    }, [state])
+
+    useEffect(() => {
+        if (localStorageTheme) {
+            // console.log('changed mode and color');
+            const { color, mode } = localStorageTheme;
+            dispatch({ type: 'CHANGE_COLOR', payload: color})
+            dispatch({ type: 'CHANGE_MODE', payload: mode })
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     const changeColor = (color) => {
         dispatch({ type: 'CHANGE_COLOR', payload: color})
