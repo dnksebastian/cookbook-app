@@ -2,6 +2,7 @@
     margin: 5rem auto;
     max-width: 40rem;
     text-align: center;
+    padding: 0 2rem;
 }
 
 #error-page h1 {

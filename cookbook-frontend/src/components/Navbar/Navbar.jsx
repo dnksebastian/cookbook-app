@@ -1,4 +1,5 @@
 import './Navbar.css'
+import { useState } from 'react';
 
 import { Link } from "react-router-dom";
 import Searchbar from '../Searchbar/Searchbar';
@@ -6,9 +7,10 @@ import Alert from '../Alert/Alert';
 
 import { useTheme } from '../../hooks/useTheme';
 import { useAuthContext } from '../../hooks/useAuthContext';
+import { useNotificationContext } from '../../hooks/useNotification';
+
 import userServices from '../../services/signup';
 import recipeServices from '../../services/recipes';
-import { useState } from 'react';
 
 
 const Navbar = () => {
@@ -18,6 +20,8 @@ const Navbar = () => {
   const userData = useAuthContext();
   const user = userData.user;
 
+  const notificationControl = useNotificationContext()
+
   const handleRemoveUser = async () => {
     let removedAll = false;
 
@@ -26,6 +30,10 @@ const Navbar = () => {
       removedAll = true
     }
     catch (err) {
+      notificationControl.displayNotification({
+        type: 'error',
+        message: 'Could not remove user data. Please try again.'
+      })
       console.log(err);
     }
 
@@ -33,8 +41,16 @@ const Navbar = () => {
       try {
         await userServices.removeUser(user.id)
         userData.logoutUser();
+        notificationControl.displayNotification({
+          type: 'info',
+          message: 'Successfully removed user and all corresponding data.'
+        })
       }
       catch (err) {
+        notificationControl.displayNotification({
+          type: 'error',
+          message: 'Could not remove user. Please try again.'
+        })
         console.log(err);
       }
     }

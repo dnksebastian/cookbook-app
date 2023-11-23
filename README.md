@@ -33,3 +33,8 @@ This is a portfolio project - a fullstack cookbook app. It allows users to manag
   - Git for version control
   - GitHub for repository hosting
   - Render for hosting
+
+## Resources
+[UXWing Icons](https://uxwing.com/)
+[CSS Loader](https://cssloaders.github.io/)
+[Favicon](https://www.favicon.cc/?action=icon&file_id=951529)

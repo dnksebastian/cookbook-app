@@ -4,6 +4,8 @@ import { useState, useEffect, useRef } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import recipeServices from '../../services/recipes'
 
+import { useNotificationContext } from '../../hooks/useNotification'
+
 import RemoveIcon from '../../assets/remove-icon.svg';
 
 
@@ -24,6 +26,8 @@ const EditRecipe = () => {
 
   const ingredientInput = useRef(null);
   const navigate = useNavigate();
+
+  const notificationControl = useNotificationContext()
 
   useEffect(() => {
     setIsLoading(true);
@@ -92,6 +96,10 @@ const EditRecipe = () => {
       // await recipeServices.getAll()
       setIsSuccess(true);
     } catch (err) {
+      notificationControl.displayNotification({
+        type: 'error',
+        message: 'Could not edit recipe. Please check your input or login again.'
+      })
       console.log(err);
     }
 

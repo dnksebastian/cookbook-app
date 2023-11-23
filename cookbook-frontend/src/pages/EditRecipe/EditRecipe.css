@@ -5,6 +5,7 @@
   max-width: 70rem;
   margin: 2rem auto;
   color: var(--cs-text);
+  padding: 0 2rem;
 }
 
 .edit-form-error,

@@ -3,7 +3,6 @@
     align-items: center;
     justify-content: space-between;
     padding: 1rem 2rem;
-    background-color: darkorchid;
 }
 
 .top-nav {
@@ -31,13 +30,14 @@
     color: white;
     padding: .5rem;
     border: 1px solid white;
+    border-radius: .5rem;
     transition: .3s;
     min-width: max-content;
 }
 
 .nav-link:hover, .nav-link:focus-visible {
     background-color: white;
-    color: darkorchid;
+    color: black;
 }
 
 #logout-btn, #delete-btn {

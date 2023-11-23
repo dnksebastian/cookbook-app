@@ -40,7 +40,7 @@ const NewRecipe = () => {
     catch (err) {
       notificationControl.displayNotification({
         type: 'error',
-        message: 'Could not add recipe. Please check your input.'
+        message: 'Could not add recipe. Please check your input or login again.'
       })
     }
   }
