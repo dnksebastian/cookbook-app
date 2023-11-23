@@ -1,0 +1,21 @@
+.search-results-page {
+    display: grid;
+    grid-template-rows: 5rem 5rem 4rem 1fr;
+    gap: .5rem;
+}
+
+.search-error-msg,
+.search-loading-msg {
+    place-self: center;
+}
+
+.search-page-title {
+    color: var(--cs-headers);
+    font-size: 3rem;
+    place-self: center;
+    grid-row: 1/2;
+}
+
+.search-results-page > .user-recipes-list {
+    grid-row: 4/5;
+}

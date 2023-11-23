@@ -10,8 +10,6 @@ const Notification = () => {
 
   const timer = useRef(0);
 
-  // console.log('here');
-
   if (timer.current !== 0) {
     clearTimeout(timer.current)
   }
@@ -27,7 +25,7 @@ const Notification = () => {
 
   
     return (
-    <div className={`notification-box ${notificationType}`}>
+    <div className={`notification-box notification-${notificationType}`}>
         {notificationControl.notification.message}
     </div>
   )

@@ -1,34 +1,109 @@
-.create {
-    color: #555;
-    max-width: 480px;
-    margin: 60px auto;
-  }
+.new-recipe-page-wrap {
+  display: grid;
+  gap: .5rem;
+  grid-template-rows: 5rem 5rem 1fr;
+  max-width: 70rem;
+  margin: 2rem auto;
+  color: var(--cs-text);
+}
 
-  /* .create label span {
-    display: block;
-    margin: 30px 0 10px;
-  } */
+.new-recipe-page-title {
+  font-size: 3rem;
+  margin-bottom: 2rem;
+}
 
-  /* .create p {
-    margin-top: 10px;
-    font-size: 0.8em;
-  } */
+.new-recipe-form {
+  grid-row: 3/4;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  min-width: 55rem;
+  margin: 0 auto;
+}
 
-  .create button {
-    display: block;
-    width: 100px;
-    font-size: 1em;
-    color: #fff;
-    padding: 8px 20px;
-    border: 0;
-    border-radius: 4px;
-    background-color: #58249c;
-    cursor: pointer;
-    text-decoration: none;
-    margin: 20px auto;
-  }
+.new-recipe-form input,
+.new-recipe-form textarea {
+  background-color: var(--cs-elements-bg);
+  color: var(--cs-elements-text);
+  border: 1px solid transparent;
+}
 
-  .new-ingredients-info {
+.new-rec-label {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  font-size: 1.3rem;
+}
+
+.new-input-helper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.new-input-helper .new-ingredients-helper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1rem;
+}
+
+.new-ingredients-helper > .btn {
+  max-width: 10rem;
+}
+
+.new-ingredients-helper > input {
+  max-width: 20rem;
+}
+
+.new-ingredients-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background-color: var(--cs-highlight);
+  max-width: max-content;
+  padding: 1rem;
+  border-radius: 1rem;
+  font-size: 1.1rem;
+}
+
+.new-cig-label {
+  font-size: 1.2rem;
+  margin-right: 1.5rem;
+}
+
+.new-ingredient-helper {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+/* .new-ingredient-el {} */
+
+.new-ingredient-remove {
+  max-width: .9rem;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.new-ingredient-remove:hover {
+  transform: rotate(20deg);
+}
+
+.dark .new-ingredient-remove {
+  filter: invert(10%);
+}
+
+.new-recipe-submit-btn {
+  max-width: 15rem;
+  margin: 0 auto;
+  font-size: 1.3rem;
+  font-weight: 500;
+}
+
+
+
+  /* .new-ingredients-info {
     display: flex;
     align-items: center;
     gap: 1rem;
@@ -58,13 +133,4 @@
   .new-ingredient-remove {
     max-width: 1rem;
     cursor: pointer;
-  }
-
-  /* .ingredients {
-    display: flex;
-    align-items: center;
-  }
-
-  .ingredients button {
-    margin: 0 0 0 10px;
   } */

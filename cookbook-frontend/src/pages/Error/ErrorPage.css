@@ -1,0 +1,16 @@
+#error-page {
+    margin: 5rem auto;
+    max-width: 40rem;
+    text-align: center;
+}
+
+#error-page h1 {
+    margin-bottom: 2rem;
+    font-size: 3rem;
+    color: var(--cs-headers);
+}
+
+#error-page p {
+    font-size: 1.3rem;
+    color: var(--cs-text);
+}

@@ -137,7 +137,7 @@ const EditRecipe = () => {
             value={newIngredient}
             />
             <button
-            className='btn'
+            className='btn edit-recipe-ingredient-btn'
             onClick={handleAddIngredient}
             >Add</button>
           </div>

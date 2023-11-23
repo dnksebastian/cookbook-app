@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import recipeServices from '../../services/recipes'
+import { useNotificationContext } from '../../hooks/useNotification';
 
 import RemoveIcon from '../../assets/remove-icon.svg'
 
@@ -19,6 +20,7 @@ const NewRecipe = () => {
   const ingredientInput = useRef(null);
 
   const navigate = useNavigate();
+  const notificationControl = useNotificationContext()
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -28,7 +30,6 @@ const NewRecipe = () => {
       ingredients,
       method,
       cookingTime
-      // cookingTime: `${cookingTime} minutes`
     }
 
     try {
@@ -37,7 +38,10 @@ const NewRecipe = () => {
       setIsSuccess(true);
     }
     catch (err) {
-      console.log(err);
+      notificationControl.displayNotification({
+        type: 'error',
+        message: 'Could not add recipe. Please check your input.'
+      })
     }
   }
 
@@ -74,12 +78,12 @@ const NewRecipe = () => {
   };
 
   return (
-    <div className='create'>
-      <h2 className='page-title'>Add a new recipe</h2>
+    <div className='new-recipe-page-wrap'>
+      <h2 className='new-recipe-page-title'>Add a new recipe</h2>
 
 
-      <form onSubmit={handleSubmit}>
-        <label>
+      <form className='new-recipe-form' onSubmit={handleSubmit}>
+        <label className='new-rec-label'>
           <span>Recipe title:</span>
           <input
           type="text"
@@ -91,7 +95,7 @@ const NewRecipe = () => {
         </label>
 
         <div className="new-input-helper">
-        <label>
+        <label className='new-rec-label'>
           <span>Recipe ingredients (one at a time):</span>
           <div className="new-ingredients-helper">
             <input
@@ -106,8 +110,9 @@ const NewRecipe = () => {
             >Add</button>
           </div>
         </label>
+
         <div className="new-ingredients-info">
-        <p>Current ingredients:</p>
+        <p className='new-cig-label'>Current ingredients:</p>
           {ingredients?.map(i =>
             <div className='new-ingredient-helper' key={i}>
               <p className='new-ingredient-el'>{i}</p> <img src={RemoveIcon} alt="Remove icon" className="new-ingredient-remove" onClick={handleRemove}/>
@@ -116,7 +121,7 @@ const NewRecipe = () => {
         </div>
         </div>
 
-        <label>
+        <label className='new-rec-label'>
           <span>Recipe method:</span>
           <textarea
           onChange={(e) => setMethod(e.target.value)}
@@ -124,7 +129,7 @@ const NewRecipe = () => {
           required
           />
         </label>
-        <label>
+        <label className='new-rec-label'>
           <span>Cooking time (minutes):</span>
           <input type="number"
           onChange={(e) => setCookingTime(e.target.value)}
@@ -132,7 +137,7 @@ const NewRecipe = () => {
           required
           />
         </label>
-        <button className='btn'>Submit</button>
+        <button className='btn new-recipe-submit-btn'>Submit</button>
       </form>
     </div>
   )

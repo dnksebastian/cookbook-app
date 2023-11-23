@@ -54,11 +54,11 @@ const Search = () => {
 
 
   return (
-    <div className='search-results'>
-      <h2 className="page-title">Recipes including "{query}"</h2>
+    <div className='search-results-page'>
+      <h2 className="search-page-title">Recipes including "{query}"</h2>
 
-      {isError && <p className='error-msg'>{isError}</p>}
-      {isLoading && <p className='loading-msg'>Loading...</p>}
+      {isError && <p className='search-error-msg error-msg'>{isError}</p>}
+      {isLoading && <p className='search-loading-msg loading-msg'><span className='loader'></span></p>}
 
       {recipes && <UserRecipes recipes={recipes} handleRemove={handleRemove}/>}
     </div>

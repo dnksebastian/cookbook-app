@@ -61,7 +61,7 @@ h1, h2, h3, h4, h5, h6 {
   --cs-cards-bg: #fff;
   --cs-headers: #555;
   --cs-text: #555;
-  --cs-buttons: green;
+  /* --cs-buttons: green; */
   --cs-highlight: hsla(0, 0%, 20%, 0.3);
 }
 
@@ -76,7 +76,7 @@ h1, h2, h3, h4, h5, h6 {
   --cs-cards-bg: #555;
   --cs-headers: #e4e4e4;
   --cs-text: #e4e4e4;
-  --cs-buttons: pink;
+  /* --cs-buttons: pink; */
   --cs-highlight: hsla(0, 0%, 87%, 0.3);
 }
 

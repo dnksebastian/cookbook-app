@@ -1,3 +1,19 @@
 .notification-box {
-    padding: 1rem;
+    padding: 2rem;
+    min-width: 8rem;
+    max-width: max-content;
+    margin-left: 3rem;
+    border-radius: 1rem;
+    font-weight: 500;
+    text-align: center;
+    font-size: 1.3rem;
+    color: var(--cs-base);
+}
+
+.notification-error {
+    background-color: rgba(241, 120, 120, .5);
+}
+
+.notification-info {
+    background-color: rgba(136, 241, 136, .5);
 }

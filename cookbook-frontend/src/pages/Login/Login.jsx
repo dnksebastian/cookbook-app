@@ -50,7 +50,10 @@ const Login = () => {
   return (
     <div className='login-page'>
       <h1>Login to Cookbook App</h1>
-      <form onSubmit={submitLogin}>
+      <div className="login-info-box">
+      <p>User expires after 1 hour!</p>
+      </div>
+      <form className='login-form' onSubmit={submitLogin}>
         <label>
           <span>Username:</span>
           <input

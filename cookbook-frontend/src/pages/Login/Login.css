@@ -1,10 +1,21 @@
 .login-page {
     margin: 1rem auto;
     max-width: 60rem;
+    color: var(--cs-text);
 }
 
 .login-page h1 {
     margin-bottom: 2rem;
+    color: var(--cs-headers);
+}
+
+.login-info-box {
+    background-color: var(--cs-highlight);
+    color: var(--cs-base);
+    margin-bottom: 2rem;
+    max-width: max-content;
+    padding: 1rem;
+    border-radius: 1rem;
 }
 
 .login-page form {
@@ -15,7 +26,10 @@
 }
 
 .login-input {
+    background-color: var(--cs-elements-bg);
+    color: var(--cs-elements-text);
     margin-top: .5rem;
+    border: 1px solid transparent;
 }
 
 .btn-login {
@@ -28,6 +42,24 @@
 }
 
 .signup-link {
+    margin: 0 auto;
+    display: block;
+    width: 100%;
+    max-width: 8rem;
+    text-align: center;
+    color: var(--cs-base);
+    font-size: 1.2rem;
+    font-weight: 500;
+    background-color: var(--cs-elements-bg);
+    padding: 1rem;
+    border-radius: 1rem;
+}
+
+.signup-link:hover {
+    filter: brightness(110%);
+}
+
+/* .signup-link {
   margin: 0 auto;
   display: block;
   max-width: 8rem;
@@ -41,8 +73,8 @@
   border: 1px solid #d4d4d4;
   background-color: #fff;
   font-weight: 500;
-}
+} */
 
-.dark .login-page {
+/* .dark .login-page {
     color: #e4e4e4;
-}
+} */

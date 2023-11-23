@@ -1,8 +1,17 @@
 .alert-wrap {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    place-items: center;
+    background-color: rgba(0, 0, 0, 0.238);
+    z-index: 100;
+    font-size: 1.4rem;
+}
+
+.alert-inner-box {
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -17,4 +26,22 @@
     justify-content: space-between;
     gap: 2rem;
     margin-top: 2rem;
+}
+
+.alert-cancel, .alert-confirm {
+    border: 1px solid transparent;
+    font-weight: 500;
+    transition: .3s;
+}
+
+.alert-cancel:hover, .alert-confirm:hover {
+    filter: brightness(110%);
+}
+
+.alert-cancel {
+    background-color: rgb(241, 120, 120);
+}
+
+.alert-confirm {
+    background-color: rgb(136, 241, 136);
 }

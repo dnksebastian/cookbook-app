@@ -51,6 +51,9 @@ const Signup = () => {
   return (
     <div className='signup-page'>
       <h1>Create new user</h1>
+      <div className="signup-info-box">
+      <p>It is possible to delete user and all data later!</p>
+      </div>
       <form onSubmit={handleSignup}>
         <label>
           <span>Display name:</span>
