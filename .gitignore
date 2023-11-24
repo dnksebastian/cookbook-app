@@ -13,8 +13,8 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-dist
-dist-ssr
+cookbook-frontend/dist
+cookbook-frontend/dist-ssr
 coverage
 *.local
 
