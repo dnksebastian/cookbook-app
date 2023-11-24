@@ -15,6 +15,11 @@ const RecipeCard = ({recipe, handleRemove}) => {
     const userData = useAuthContext();
     const user = userData.user;
 
+    const confirmDelete = () => {
+      setShowAlert(false)
+      handleRemove(recipe?.id)
+    };
+
   return (
     <div className='recipe-card'>
         <h3 className='recipe-card-title'>{recipe?.title}</h3>
@@ -44,7 +49,8 @@ const RecipeCard = ({recipe, handleRemove}) => {
         title={'Delete recipe?'}
         description={'Do you want to delete this recipe?'}
         confirmBtnLabel={'Yes'}
-        onConfirm={() => handleRemove(recipe?.id)}
+        // onConfirm={() => handleRemove(recipe?.id)}
+        onConfirm={confirmDelete}
         />
     </div>
   )

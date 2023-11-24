@@ -22,6 +22,11 @@ const Navbar = () => {
 
   const notificationControl = useNotificationContext()
 
+  const confirmRemove = () => {
+    handleRemoveUser()
+    setShowAlert(false)
+  }
+
   const handleRemoveUser = async () => {
     let removedAll = false;
 
@@ -34,7 +39,6 @@ const Navbar = () => {
         type: 'error',
         message: 'Could not remove user data. Please try again.'
       })
-      console.log(err);
     }
 
     if(removedAll) {
@@ -51,7 +55,6 @@ const Navbar = () => {
           type: 'error',
           message: 'Could not remove user. Please try again.'
         })
-        console.log(err);
       }
     }
 
@@ -84,7 +87,7 @@ const Navbar = () => {
       title='Delete user?'
       description="Do you want to delete current user and all recipes?"
       confirmBtnLabel='Yes'
-      onConfirm={handleRemoveUser}
+      onConfirm={confirmRemove}
       />
     </header>
   )
