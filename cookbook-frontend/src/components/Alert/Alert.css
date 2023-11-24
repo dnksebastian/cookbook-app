@@ -45,3 +45,18 @@
 .alert-confirm {
     background-color: rgb(136, 241, 136);
 }
+
+@media screen and (max-width: 725px) {
+    .alert-wrap {
+        height: 100%;
+        place-items: unset;
+        justify-items: center;
+    }
+
+    .alert-inner-box {
+        position: relative;
+        top: min(50%, 30rem);
+        left: 0;
+        height: max-content;
+    }
+}
