@@ -12,7 +12,9 @@ const UserRecipes = ({recipes, handleRemove}) => {
   const recipesByUser = recipes.filter(r => r.user?.username === user?.username);
 
   if (recipesByUser.length === 0) {
-    return <div className='error'>No recipes to load...</div>
+    return <div className='error-empty'>
+      <p>No recipes to load...</p>
+    </div>
   }
 
     

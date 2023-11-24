@@ -7,6 +7,22 @@
     place-self: center;
   }
 
+  .error-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background-color: var(--cs-elements-bg);
+    color: var(--cs-elements-text);
+    font-weight: 500;
+    font-size: 1.5rem;
+    text-align: center;
+    border-radius: 1rem;
+    max-width: fit-content;
+    justify-self: center;
+  }
+
 
   @media screen and (max-width: 725px) {
     .user-recipes-list {

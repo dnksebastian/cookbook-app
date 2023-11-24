@@ -2,6 +2,9 @@
 
 This is a portfolio project - a fullstack cookbook app. It allows users to manage and organize their recipes. The project includes both front-end and back-end components.
 
+- [Live Cookbook App](https://cookbook-app-u5le.onrender.com)
+(please notice that it is hosted on a free Render service which may take a moment to spin up)
+
 ## Table of Contents
 
 - [Features](#features)
@@ -35,6 +38,6 @@ This is a portfolio project - a fullstack cookbook app. It allows users to manag
   - Render for hosting
 
 ## Resources
-[UXWing Icons](https://uxwing.com/)
-[CSS Loader](https://cssloaders.github.io/)
-[Favicon](https://www.favicon.cc/?action=icon&file_id=951529)
+- [UXWing Icons](https://uxwing.com/)
+- [CSS Loader](https://cssloaders.github.io/)
+- [Favicon](https://www.favicon.cc/?action=icon&file_id=951529)
