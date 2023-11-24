@@ -111,3 +111,25 @@
   font-size: 1.3rem;
   font-weight: 500;
 }
+
+@media screen and (max-width: 725px) {
+
+  .edit-recipe-wrap {
+    grid-template-rows: max-content max-content 1fr;
+  }
+
+  .edit-form-wrapper,
+  .edit-recipe-form {
+    min-width: unset;
+  }
+
+  .edit-cig-label {
+    margin-bottom: 1rem;
+  }
+
+  .ingredients-info {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem
+  }
+}

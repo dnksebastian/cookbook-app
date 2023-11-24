@@ -6,11 +6,15 @@ import recipeServices from '../../services/recipes';
 // import RecipeList from '../../components/RecipeList/RecipeList';
 import UserRecipes from '../../components/UserRecipes/UserRecipes';
 
+import { useNotificationContext } from '../../hooks/useNotification';
+
 const Home = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState('');
 
   const [recipes, setRecipes] = useState([]);
+
+  const notificationControl = useNotificationContext()
 
   const handleRemove = async (id) => {
     try {
@@ -20,8 +24,16 @@ const Home = () => {
       setRecipes(newRecipes)
       setIsError('')
       setIsLoading(false)
+      notificationControl.displayNotification({
+        type: 'info',
+        message: 'Recipe has been removed!'
+      })
     } catch (error) {
       setIsLoading(false)
+      notificationControl.displayNotification({
+        type: 'error',
+        message: 'Could not remove recipe. Please relogin and try again.'
+      })
       console.log(error);
     }
   };

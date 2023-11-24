@@ -1,4 +1,5 @@
 .App {
     min-height: 100%;
     background-color: var(--cs-main-bg);
+    padding-bottom: 3rem;
   }

@@ -20,3 +20,9 @@
 .search-results-page > .user-recipes-list {
     grid-row: 4/5;
 }
+
+@media screen and (max-width: 725px) {
+    .search-results-page {
+        grid-template-rows: max-content max-content max-content 1fr;
+    }
+}

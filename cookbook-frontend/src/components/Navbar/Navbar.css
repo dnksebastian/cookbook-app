@@ -50,3 +50,37 @@
     background-color: transparent;
     color: white;
 }
+
+
+/* Mobile styles */
+
+@media screen and (max-width: 725px) {
+    .header {
+        padding: 1rem 1rem;
+    }
+
+    .top-nav {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .logo {
+        order: 1;
+    }
+
+    .auth-helper {
+        order: 2;
+        flex-direction: column;
+        gap: 1rem
+    }
+
+    .searchbar {
+        order: 3;
+    }
+
+    .searchbar form {
+        flex-direction: column;
+    }
+
+    
+}

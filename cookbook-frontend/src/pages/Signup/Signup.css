@@ -60,6 +60,8 @@
     filter: brightness(110%);
 }
 
-/* .dark .signup-page {
-    color: #e4e4e4;
-} */
+@media screen and (max-width: 725px) {
+    .login-box h2 {
+        margin-bottom: 2rem;
+    }
+}

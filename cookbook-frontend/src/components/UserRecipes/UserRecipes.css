@@ -6,13 +6,10 @@
     max-width: 1200px;
     place-self: center;
   }
-  
-  /* dark mode */
-  /* .user-recipes-list .card.dark {
-    background: #555;
+
+
+  @media screen and (max-width: 725px) {
+    .user-recipes-list {
+      grid-template-columns: 1fr;
+    }
   }
-  .user-recipes-list .card.dark p,
-  .user-recipes-list .card.dark h3,
-  .user-recipes-list .card.dark div {
-    color: #e4e4e4;
-  } */
